@@ -3,10 +3,8 @@ package com.desarrollo.androidmysql
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -38,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: Void?): Void? {
             try{
                 Class.forName("com.mysql.jdbc.Driver")
-                val conn:Connection = DriverManager.getConnection("jdbc:mysql://192.168.1.45:3306/android", "andro", "andro" )
+                val conn:Connection = DriverManager.getConnection("jdbc:mysql://192.168.1.45:3306/android?useSSL=false", "andro", "andro" )
                 val st:Statement = conn.createStatement()
                 val rs:ResultSet = st.executeQuery("SELECT * FROM test")
 
