@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         btn = findViewById(R.id.btnShow)
 
         btn.setOnClickListener{
-            Task(this).execute()
+            val task = Task(this)
+            task.execute()
         }
 
     }
@@ -37,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: Void?): Void? {
             try{
                 Class.forName("com.mysql.jdbc.Driver")
-                var conn:Connection = DriverManager.getConnection("jdbc:mysql://192.168.1.45:3306/android", "andro", "andro" )
-                var st:Statement = conn.createStatement()
-                var rs:ResultSet = st.executeQuery("SELECT * FROM test")
+                val conn:Connection = DriverManager.getConnection("jdbc:mysql://192.168.1.45:3306/android", "andro", "andro" )
+                val st:Statement = conn.createStatement()
+                val rs:ResultSet = st.executeQuery("SELECT * FROM test")
 
                 while (rs.next()){
                     records += rs.getString(1) + " " + rs.getString(2) + "\n"
@@ -51,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(result: Void?) {
-            activity.text.text = records;
-            if( error != "" && error != null ){
+            activity.text.text = records
+            if(error != ""){
                 activity.errortext.text = error
             }
             super.onPostExecute(result)
